@@ -1,0 +1,35 @@
+services:
+  psql:
+    image: postgres:latest
+    container_name: psql
+    environment:
+      POSTGRES_USER: hospital
+      POSTGRES_PASSWORD: hospital
+      POSTGRES_DB: hospital_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./psql_data:/var/lib/postgresql/data
+    networks:
+      - hospital_network
+  
+  hospital-be:
+    build:
+      context: ./hospital-be
+      dockerfile: Dockerfile
+    container_name: hospital-be
+    environment:
+      DATABASE_URL: postgres://hospital:hospital@psql:5432/hospital_db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - psql
+    networks:
+      - hospital_network
+
+
+volumes:
+  psql_data:
+    driver: local
+networks:
+  hospital_network:
