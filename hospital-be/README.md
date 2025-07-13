@@ -7,6 +7,9 @@
 - User Privilege
 - - User can access docker, else, use `sudo` mode
 
+## Verify the tests
+- `make test`
+
 # Start the container
 
 ## Deploy the application
