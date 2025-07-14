@@ -14,6 +14,11 @@
 
 ## Deploy the application
 
+### Start the Database Server
+From root of the project (where docker-compose.yml file is located). This is to allow the migrations to take place.
+
+- `docker compose up -d --build psql`
+
 ### Migrate the database
 Assuming you have not started this application earlier on your machine, the database table still need to be created.
 
